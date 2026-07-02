@@ -1,0 +1,4 @@
+{
+  "extends": "@encore/config/tsconfig.base.json",
+  "include": ["src"]
+}
