@@ -1,75 +1,96 @@
 # Encore
 
-Encore is a premium circular fashion infrastructure platform for Latin America. It connects clients, garment owners, and internal operations in one role-aware SaaS application.
+Encore es una plataforma mexicana de moda circular premium.
 
-This repository starts as a production-minded monorepo:
+La idea es simple: una propietaria sube vestidos premium, Encore los revisa, fotografía, almacena y opera. Mientras el vestido se vende, también puede rentarse. Cada renta genera ingresos y, si una clienta decide comprarlo, la prenda se vende.
 
-- `apps/web`: Next.js 15, React 19, TypeScript, TailwindCSS 4, shadcn-ready UI primitives, Framer Motion, React Query, React Hook Form, Zod.
-- `apps/api`: FastAPI, PostgreSQL, SQLAlchemy, Alembic, JWT-ready auth, Redis/Celery-ready background jobs.
-- `packages/types`: shared product and role contracts.
-- `packages/config`: shared TypeScript configuration.
-- `infra/docker`: local development containers.
+## Estructura
 
-## Product Direction
-
-Encore is not an e-commerce template and not a traditional dress rental shop. It is the operating layer for buying, selling, consigning, and renting premium fashion.
-
-The app supports three primary experiences:
-
-- Client: discovery, rentals, purchases, favorites, wishlist, recommendations, profile, payments, notifications.
-- Owner: garments, revenue, active rentals, sales, requests, garment lifecycle, calendar, banking, commissions.
-- Admin: executive KPIs, users, owners, orders, logistics, laundry, payments, permissions, CMS, reporting.
-
-## Local Setup
-
-1. Copy environment variables:
-
-```bash
-cp .env.example .env
+```text
+encore/
+  frontend/     App web con Next.js
+  backend/      API con FastAPI
+  docker/       PostgreSQL, Redis, frontend y backend
+  .env.example  Variables de entorno de ejemplo
+  package.json  Comandos principales del frontend
 ```
 
-2. Install dependencies:
+Eso es lo importante para GitHub.
+
+## Requisitos
+
+- Node.js 22
+- pnpm 11
+- Python 3.12
+- Docker Desktop, si quieres levantar PostgreSQL y Redis localmente
+
+## Instalación
 
 ```bash
 pnpm install
+cp .env.example .env
 ```
 
-3. Start infrastructure:
-
-```bash
-docker compose -f infra/docker/docker-compose.yml up -d
-```
-
-4. Run the apps:
+## Correr el frontend
 
 ```bash
 pnpm dev
 ```
 
-## Quality
+Abre:
+
+```text
+http://localhost:3000
+```
+
+## Correr el backend
+
+```bash
+cd backend
+python -m pip install -e ".[dev]"
+fastapi dev app/main.py
+```
+
+La API queda en:
+
+```text
+http://localhost:8000
+```
+
+## Correr servicios con Docker
+
+```bash
+docker compose -f docker/docker-compose.yml up -d
+```
+
+## Validaciones
+
+Frontend:
 
 ```bash
 pnpm lint
 pnpm typecheck
-pnpm test
+pnpm build
 ```
 
-Python checks:
+Backend:
 
 ```bash
-cd apps/api
-ruff check .
-pytest
+python -m ruff check backend
+python -m pytest backend
 ```
 
-## Architecture Principles
+## Qué subir a GitHub
 
-- Feature-based UI organization.
-- Strong role boundaries.
-- Domain status modeled explicitly for the garment lifecycle.
-- Backend modules separated by API, core configuration, database, models, schemas, and services.
-- Docker and GitHub Actions included from day one.
+Sube la carpeta completa `encore`, pero Git solo debe incluir archivos de código y configuración.
 
-## Status
+No se suben:
 
-Initial platform foundation: landing, auth screens, role-aware dashboards, API health/auth/catalog scaffolding, garment domain model, Docker, CI, and repository hygiene.
+- `.env`
+- `node_modules/`
+- `.next/`
+- `.venv/`
+- `__pycache__/`
+- cachés o archivos generados
+
+El archivo `.gitignore` ya está preparado para evitar eso.

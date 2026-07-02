@@ -15,11 +15,8 @@ importers:
         specifier: ^3.4.2
         version: 3.9.3
 
-  apps/web:
+  frontend:
     dependencies:
-      '@encore/types':
-        specifier: workspace:*
-        version: link:../../packages/types
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.80.0(react@19.0.0))
@@ -63,9 +60,6 @@ importers:
         specifier: ^3.24.1
         version: 3.25.76
     devDependencies:
-      '@encore/config':
-        specifier: workspace:*
-        version: link:../../packages/config
       '@eslint/eslintrc':
         specifier: ^3.2.0
         version: 3.3.5
@@ -96,17 +90,6 @@ importers:
       vitest:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.20.0)(lightningcss@1.32.0)
-
-  packages/config: {}
-
-  packages/types:
-    devDependencies:
-      '@encore/config':
-        specifier: workspace:*
-        version: link:../config
-      typescript:
-        specifier: ^5.7.2
-        version: 5.9.3
 
 packages:
 
