@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: encore-collective
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: corepack enable && corepack prepare pnpm@11.7.0 --activate && pnpm install --frozen-lockfile && pnpm --filter @encore/frontend build
+    startCommand: pnpm --filter @encore/frontend start -- -p $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NEXT_PUBLIC_API_URL
+        value: https://encore-collective.onrender.com
