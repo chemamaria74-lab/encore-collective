@@ -1,18 +1,6 @@
 {
-  "name": "encore",
+  "name": "@encore/config",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
-  "scripts": {
-    "dev": "pnpm --parallel --filter @encore/web --filter @encore/api dev",
-    "dev:web": "pnpm --filter @encore/web dev",
-    "lint": "pnpm --recursive lint",
-    "typecheck": "pnpm --recursive typecheck",
-    "test": "pnpm --recursive test",
-    "format": "prettier --write ."
-  },
-  "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "prettier": "^3.4.2"
-  }
+  "files": ["tsconfig.base.json"]
 }
